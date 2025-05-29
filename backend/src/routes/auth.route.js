@@ -12,5 +12,11 @@ router.post("/login", login);
 router.post("/logout", logout);
 
 // protected routes
-router.post("/onboarding",protectRoute, onboard);
+router.post("/onboarding", protectRoute, onboard);
+
+router.get("/me", protectRoute, (req, res) => {
+  // @ts-ignore
+  res.status(200).json({ success: true, user: req.user });
+});
+
 export default router;

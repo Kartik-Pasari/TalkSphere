@@ -64,11 +64,13 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Add matchPassword method
 userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+  const isPasswordCorrect = await bcrypt.compare(
+    enteredPassword,
+    this.password
+  );
+  return isPasswordCorrect;
 };
-
 // Create the model
 const User = mongoose.model("User", userSchema);
 
